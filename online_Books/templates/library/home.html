@@ -1,0 +1,9 @@
+{% extends 'library/base.html' %}
+{% block title %}Home - Library{% endblock %}
+{% block content %}
+<h1>Welcome to our Online Library</h1>
+<p>Discover, explore, and manage a wide collection of books at your fingertips. Our Online Library helps you search, borrow, and keep track of books easily—all in one place.</p>
+<h2>Quote for Us</h2>
+<p>“A reader lives a thousand lives before he dies. The man who never reads lives only one.”</p>
+<p>Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a> or go to <a href="{% url 'dashboard' %}">Dashboard</a></p>
+{% endblock %}

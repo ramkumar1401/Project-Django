@@ -1,0 +1,35 @@
+{% extends 'library/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<form method="get" action="{% url 'dashboard' %}">
+    <input type="search" name="q" placeholder="Search by title, author, or category" value="{{ search_query }}">
+    <button type="submit">Search</button>
+</form>
+
+<h3>Borrowed Books</h3>
+<ul>
+    {% for item in borrowed_books %}
+    <li>{{ item.book.title }} borrowed on {{ item.borrow_date }}
+        <form action="{% url 'return_book' item.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Return</button>
+        </form>
+    </li>
+    {% empty %}
+    <li>No borrowed books</li>
+    {% endfor %}
+</ul>
+
+<h3>Available Books</h3>
+<ul>
+    {% for book in available_books %}
+    <li>{{ book.title }} by {{ book.author.name }} - Category: {{ book.category.name }}
+        <a href="{% url 'borrow_book' book.id %}">Borrow</a>
+    </li>
+    {% empty %}
+    <li>No books available</li>
+    {% endfor %}
+</ul>
+{% endblock %}
